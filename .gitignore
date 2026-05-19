@@ -1,0 +1,51 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.token
+*.secret
+secrets/
+
+# Local config
+config/local.*
+config/private.*
+
+# Dependencies and build outputs
+node_modules/
+__pycache__/
+.pytest_cache/
+dist/
+build/
+.next/
+.venv/
+venv/
+
+# Generated or local reports
+reports/private/
+reports/tmp/
+*.log
+
+# Raw business data and exports
+data/raw/
+exports/
+downloads/
+private/
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.zip
+*.7z
+*.rar
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/settings.json
