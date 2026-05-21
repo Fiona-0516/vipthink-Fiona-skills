@@ -177,6 +177,16 @@
         background: #fff;
       }
 
+      .shot video {
+        display: block;
+        width: 100%;
+        max-height: 620px;
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #000;
+      }
+
       .link-box {
         padding: 16px;
         border-radius: 8px;
@@ -372,24 +382,27 @@
       </section>
 
       <section>
-        <h2>四、有图有真相：现场展示素材</h2>
+        <h2>四、有图有真相：实际产出四宫格</h2>
         <div class="evidence">
-          <div class="shot wide">
-            <strong>证据 1：钉钉 AI 听记可视化纪要</strong>
-            <p>展示团队整体探索：权限、API、工具选择、数据安全、从辅助到执行的跃迁。</p>
-            <img src="./share-assets/ai-share-summary.png" alt="钉钉 AI 听记可视化纪要" />
+          <div class="shot">
+            <strong>yoyo：AI 对练系统</strong>
+            <p>能放视频的直接放视频，展示从工具想法到可交互练习系统的实际产出。</p>
+            <video src="./share-assets/yoyo-ai-practice.mp4" controls playsinline></video>
           </div>
           <div class="shot">
-            <strong>证据 2：钉钉 AI 纪要文字版</strong>
-            <p>已读取桌面文件《纪要_AI分享会1.md》，用于提炼柠檬、Dainty、小加、彩笔、陈健、小饼干、CoCo、yoyo 的具体进展和卡点。</p>
+            <strong>彩笔：BI 数据分析与文化海报</strong>
+            <p>展示 AI 辅助分析数据、生成文化激励海报的阶段性成果。</p>
+            <img src="./share-assets/caibi-share.png" alt="彩笔的 AI 分享产出" />
           </div>
           <div class="shot">
-            <strong>证据 3：发音评估工具公开测试页</strong>
-            <p>可现场打开测试链接，展示语种选择、随机题目、100 字左右话术、最多 3 次录制和后台报告。</p>
+            <strong>陈健：企微排课 AI 助手</strong>
+            <p>展示 AI 根据学员 ID 完成排课，并生成确认信息和后续操作提示。</p>
+            <img src="./share-assets/chenjian-share.png" alt="陈健的 AI 排课助手产出" />
           </div>
           <div class="shot">
-            <strong>证据 4：GitHub 归档路径</strong>
-            <p>网页工具已按目录归档到 GitHub：tools/teacher-pronunciation-assessment/，后续版本可用脚本自动上传。</p>
+            <strong>Fiona：视频发音评估工具</strong>
+            <p>展示招聘初筛场景下的多语种视频录制、随机题库和发音评分工具。</p>
+            <img src="./share-assets/fiona-assessment-tool.svg" alt="Fiona 视频发音评估工具" />
           </div>
         </div>
       </section>
