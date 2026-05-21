@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 工具应用实践分享 - Fiona</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --ink: #18212f;
+        --muted: #667085;
+        --line: #d8dee8;
+        --panel: #ffffff;
+        --blue: #1d4ed8;
+        --green: #0f766e;
+        --orange: #b45309;
+        --red: #b42318;
+        --purple: #7c3aed;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.65;
+      }
+
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 38px 24px 64px;
+      }
+
+      .hero,
+      section,
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .hero {
+        padding: 34px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 40px;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 28px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      section {
+        margin-top: 22px;
+        padding: 28px;
+      }
+
+      .summary {
+        font-size: 20px;
+      }
+
+      .meta,
+      .note {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        margin-bottom: 12px;
+        border-radius: 999px;
+        color: var(--blue);
+        background: #e8f0ff;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .tag.green {
+        color: var(--green);
+        background: #dff5f0;
+      }
+
+      .tag.orange {
+        color: var(--orange);
+        background: #fff4df;
+      }
+
+      .tag.red {
+        color: var(--red);
+        background: #fee2e2;
+      }
+
+      .tag.purple {
+        color: var(--purple);
+        background: #ede9fe;
+      }
+
+      ul {
+        margin: 8px 0 0;
+        padding-left: 22px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .evidence {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .shot {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fafcff;
+      }
+
+      .shot strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .shot.wide {
+        grid-column: 1 / -1;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        max-height: 620px;
+        object-fit: contain;
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .link-box {
+        padding: 16px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        word-break: break-all;
+      }
+
+      a {
+        color: var(--blue);
+      }
+
+      @media (max-width: 860px) {
+        main {
+          padding: 24px 14px 44px;
+        }
+
+        .hero,
+        section {
+          padding: 22px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .grid,
+        .grid.three,
+        .evidence {
+          grid-template-columns: 1fr;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">AI 周会分享 · 2026-05-21 16:30</p>
+        <h1>AI 工具应用实践分享</h1>
+        <p class="summary">本次分享围绕“AI 是否真正进入业务流程”展开：团队伙伴分别在邮件处理、监课、数据播报、排课、视频复核、聊天记录分析等场景探索；我自己的进展是用 AI 协作开发并发布了视频发音评估工具。</p>
+        <p class="meta">材料来源：钉钉听记《AI分享会1》、可视化纪要 PDF、Fiona 视频发音评估工具开发记录</p>
+      </header>
+
+      <section>
+        <h2>一、核心挑战与洞察</h2>
+        <div class="grid three">
+          <article class="card">
+            <span class="tag purple">权限与 API 限制</span>
+            <h3>企业系统开放性是落地瓶颈</h3>
+            <ul>
+              <li>部分系统无法让 AI 直接接入，常见限制包括账号、权限、API、音频读取。</li>
+              <li>LINE 仅部分版本支持 API，钉钉和企微也存在机器人外联、权限审批问题。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">从辅助到执行</span>
+            <h3>信任与安全需要过渡机制</h3>
+            <ul>
+              <li>AI 自动回复、自动播报、自动监课都涉及误判风险。</li>
+              <li>当前更适合采用“AI 生成草稿或报告，人工复核后执行”的模式。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">工具选择</span>
+            <h3>计划模式提升复杂任务成功率</h3>
+            <ul>
+              <li>复杂任务先让 AI 生成方案或 MRD，再执行开发更稳定。</li>
+              <li>工具选择上，扣子、龙虾、Codex 等适合不同场景。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>二、团队伙伴 AI 使用进展</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">柠檬老师</span>
+            <h3>AI 自动处理邮件功能探索</h3>
+            <ul>
+              <li>已实现对中英班邮件的分类、整理与自动回复。</li>
+              <li>AI 根据预设审批标准和回复模板执行操作。</li>
+              <li>理想目标：每日自动处理全部邮件，并生成收件数量、类型分布、批复情况报告。</li>
+              <li>当前暂未设置定时任务，因为仍担心 AI 误判导致乱回复。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag red">Dainty</span>
+            <h3>AI 监课功能推进受阻</h3>
+            <ul>
+              <li>计划让 Codex 登录教师端课程回放系统，进行 AI 监课并填写监课记录表。</li>
+              <li>当前卡点：AI 能登录系统并打开视频，但无法获取教师和学生的语音交流。</li>
+              <li>正在与 AI 协商解决方案，尚未完成。</li>
+              <li>建议：拆成画面观察和音频转写两个模块分别验证。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag orange">小加</span>
+            <h3>LINE 账号聊天记录分析失败</h3>
+            <ul>
+              <li>原计划利用 AI 审核 LINE 账号中教师回复率及互动质量。</li>
+              <li>主要障碍：无账号密码，只能扫码登录；手动下载聊天记录效率低。</li>
+              <li>曾探索 LINE API，但涉及费用，且台版不支持，最终未落地。</li>
+              <li>建议更换 Next 工具，并把 AI 当作助手进行拆解推进。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag green">彩笔</span>
+            <h3>BI 数据自动分析与文化海报生成</h3>
+            <ul>
+              <li>因数据安全和权限问题，暂未实现 AI 直连 BI 看板。</li>
+              <li>当前采用半自动化：手动下载数据后交由 AI 分析，再发送到钉钉群。</li>
+              <li>AI 可根据教师数据和头像生成排名海报，用于文化激励。</li>
+              <li>尚未打通自动推送，涉及新模型软件安装和实名认证。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag">陈健</span>
+            <h3>企微排课系统 AI 化实践</h3>
+            <ul>
+              <li>通过扣子配置企微 AI 助手，模拟真实排课场景。</li>
+              <li>输入学员 ID 后，数秒内完成排课并返回课程信息。</li>
+              <li>AI 能生成推荐话术，方便教务复制给家长。</li>
+              <li>当前限制：企微智能机器人不能对外部用户开放，需推动接口权限。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag purple">小饼干</span>
+            <h3>AI 监课结果钉钉播报</h3>
+            <ul>
+              <li>目标：将后台 AI 监课结果通过钉钉机器人每日播报。</li>
+              <li>当前进度约 40%，数据接口梳理与播报文案设计已完成。</li>
+              <li>卡点：技术权限申请未通过，已重新提交并催办。</li>
+              <li>建议建立闭环：机器人艾特教师，要求限期反馈原因或整改计划。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag orange">CoCo 老师</span>
+            <h3>赛课视频 AI 复核分析</h3>
+            <ul>
+              <li>初期使用 Open Code 连接钉钉机器人失败。</li>
+              <li>当前改用龙虾工具进行视频逐帧分析，已完成初步测试。</li>
+              <li>目前需手动下载赛课视频到本地，再由 AI 按评分标准复核。</li>
+              <li>未来设想：与钉钉系统关联，实现自动读取与跟进。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag red">yoyo 老师</span>
+            <h3>账号被封影响工具发布</h3>
+            <ul>
+              <li>当前账号被封禁，正在申诉。</li>
+              <li>原计划发布的 AI 工具未保存，需等待账号恢复。</li>
+              <li>提醒：AI 产出要及时备份，避免依赖单一账号或平台。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>三、我的 AI 使用进展：视频发音评估工具</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag green">已完成</span>
+            <h3>从需求到可测试网页</h3>
+            <ul>
+              <li>背景：原计划接入钉钉面试群自动评估候选人语音，但权限复杂，改为自主网页工具。</li>
+              <li>候选人可选择粤语、台湾腔普通话、英语中的一种或多种测试。</li>
+              <li>每个语种至少 10 套题库，随机抽题，降低泄题和背稿风险。</li>
+              <li>每个语种最多录制 3 次，提交前可重新录制，提交后锁定。</li>
+              <li>已完成候选人端、题库管理、后台报告、历史录制、GitHub 归类上传和公开链接。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag">下一步</span>
+            <h3>从演示工具到招聘工具</h3>
+            <ul>
+              <li>当前评分是前端模拟，正式版需接入 Azure Speech Pronunciation Assessment 和 OpenAI 转写/语义评估。</li>
+              <li>需要收集已通过候选人的录音样本，用于校准评分阈值。</li>
+              <li>需要增加后端数据库，让视频和评分回传给招聘团队。</li>
+              <li>建议保留人工复核机制，尤其是低于 80 分或灰区样本。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>四、有图有真相：现场展示素材</h2>
+        <div class="evidence">
+          <div class="shot wide">
+            <strong>证据 1：钉钉 AI 听记可视化纪要</strong>
+            <p>展示团队整体探索：权限、API、工具选择、数据安全、从辅助到执行的跃迁。</p>
+            <img src="./share-assets/ai-share-summary.png" alt="钉钉 AI 听记可视化纪要" />
+          </div>
+          <div class="shot">
+            <strong>证据 2：钉钉 AI 纪要文字版</strong>
+            <p>已读取桌面文件《纪要_AI分享会1.md》，用于提炼柠檬、Dainty、小加、彩笔、陈健、小饼干、CoCo、yoyo 的具体进展和卡点。</p>
+          </div>
+          <div class="shot">
+            <strong>证据 3：发音评估工具公开测试页</strong>
+            <p>可现场打开测试链接，展示语种选择、随机题目、100 字左右话术、最多 3 次录制和后台报告。</p>
+          </div>
+          <div class="shot">
+            <strong>证据 4：GitHub 归档路径</strong>
+            <p>网页工具已按目录归档到 GitHub：tools/teacher-pronunciation-assessment/，后续版本可用脚本自动上传。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>五、可分享测试链接</h2>
+        <div class="link-box">
+          <a href="https://fiona-0516.github.io/vipthink-Fiona-skills/tools/teacher-pronunciation-assessment/">
+            https://fiona-0516.github.io/vipthink-Fiona-skills/tools/teacher-pronunciation-assessment/
+          </a>
+        </div>
+        <p class="note">说明：当前版本数据保存在测试者自己的浏览器中，适合体验流程；正式招聘使用前，需要增加服务端上传和集中后台。</p>
+      </section>
+
+      <section>
+        <h2>六、我的总结</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag red">关键卡点</span>
+            <h3>AI 使用的第一关，往往不是能力，而是开始</h3>
+            <ul>
+              <li>第一个卡点是工具安装、账号注册、权限配置。很多人还没真正开始使用，就因为流程麻烦退回原来的工作方式。</li>
+              <li>第二个卡点是结果不准确。开始用之后，需要不断描述、纠正、调优，有人会觉得“这也没有提效，有这个时间我自己早就干完了”。</li>
+              <li>这很像刚晋升管理者时的转变：从自己一个人拿结果，到推动一个团队拿结果。带教伙伴有时很费劲，但这正是杠杆开始形成的地方。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag green">持续动力</span>
+            <h3>要刻意给自己设置“哇哦”时刻</h3>
+            <ul>
+              <li>AI 学习不能只盯着最终大成果，中间一定要有阶段性成就感。</li>
+              <li>一个脚本跑通、一个网页打开、一个流程自动生成，都是继续研究下去的燃料。</li>
+              <li>走在前面的人真的值得尊敬，因为他们踩过的坑、整理出的路径，可以让后面的伙伴少走很多弯路。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="tag purple">认知转变</span>
+            <h3>从“AI 能帮我做什么”到“这件事怎么用 AI 做”</h3>
+            <ul>
+              <li>以前我们会绞尽脑汁想：AI 可以帮我做什么？</li>
+              <li>现在更重要的问题变成：眼前这件事，可以用 AI 怎么做？</li>
+              <li>当你发现自己不知道的时候，恰恰是知道的开始。真正难的是：你不知道自己不知道。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
