@@ -3,147 +3,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>多语种教师候选人发音初筛</title>
+    <title>Fiona 中文教学技能库</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="topbar">
       <div>
-        <p class="eyebrow">教师招聘测评</p>
-        <h1>多语种视频录制与发音初筛</h1>
+        <p class="eyebrow">中文技能库入口</p>
+        <h1>Fiona 的中文教学技能库</h1>
       </div>
-      <nav class="tabs" aria-label="视图切换">
-        <button class="tab active" data-view="candidate">候选人端</button>
-        <button class="tab" data-view="admin">招聘后台</button>
-        <button class="tab" data-view="questions">题库管理</button>
-      </nav>
     </header>
 
     <main>
-      <section id="candidate" class="view active">
-        <section class="band">
-          <div class="section-head">
-            <div>
-              <h2>选择要测试的语种</h2>
-              <p>候选人可选择一种或多种语种。每个语种随机抽题，最多录制 3 次，重录不会换题。</p>
-            </div>
-            <button id="resetCandidate" class="ghost">新候选人</button>
+      <section class="band">
+        <div class="section-head">
+          <div>
+            <h2>请从中文目录进入</h2>
+            <p>这个仓库已经整理成中文技能库。网页工具仍保留运行必需的英文文件名，但入口和说明都在中文目录里。</p>
           </div>
-
-          <div class="candidate-form">
-            <label>
-              候选人姓名
-              <input id="candidateName" type="text" placeholder="请输入姓名" autocomplete="name" />
-            </label>
-            <label>
-              应聘岗位
-              <input id="candidateRole" type="text" placeholder="例如：粤语老师 / 英语老师" />
-            </label>
-          </div>
-
-          <div id="languageChoices" class="language-grid"></div>
-          <div class="actions">
-            <button id="startAssessment" class="primary">开始测评</button>
-            <p id="candidateHint" class="hint">录制前请允许浏览器访问摄像头和麦克风。</p>
-          </div>
-        </section>
-
-        <section class="workspace">
-          <div id="testCards" class="test-grid"></div>
-        </section>
-      </section>
-
-      <section id="admin" class="view">
-        <section class="band">
-          <div class="section-head">
-            <div>
-              <h2>候选人报告</h2>
-              <p>每个语种独立出结论。默认展示最终提交或最后一次有效录制，历史录制全部保留。</p>
-            </div>
-            <button id="clearReports" class="ghost danger">清空演示数据</button>
-          </div>
-          <div id="reportSummary" class="summary-strip"></div>
-        </section>
-        <section id="reports" class="report-list"></section>
-      </section>
-
-      <section id="questions" class="view">
-        <section class="band">
-          <div class="section-head">
-            <div>
-              <h2>考核话术库</h2>
-              <p>每个语种至少 10 条启用话术。已使用题目会随候选人记录保存快照，后续编辑不影响旧报告。</p>
-            </div>
-          </div>
-          <form id="questionForm" class="question-form">
-            <label>
-              语种
-              <select id="questionLanguage"></select>
-            </label>
-            <label>
-              场景
-              <input id="questionScene" type="text" placeholder="例如：课堂规则" />
-            </label>
-            <label>
-              难度
-              <select id="questionDifficulty">
-                <option value="基础">基础</option>
-                <option value="标准">标准</option>
-                <option value="进阶">进阶</option>
-              </select>
-            </label>
-            <label class="full">
-              话术内容
-              <textarea id="questionText" rows="4" placeholder="输入考核话术"></textarea>
-            </label>
-            <input id="editingQuestionId" type="hidden" />
-            <button class="primary" type="submit">保存话术</button>
-            <button id="cancelEdit" class="ghost" type="button">取消编辑</button>
-          </form>
-        </section>
-        <section id="questionBank" class="question-bank"></section>
+        </div>
+        <div class="actions">
+          <a class="primary" href="./工具/教师发音初筛工具/index.html">打开教师发音初筛工具</a>
+          <a class="ghost" href="./工具/AI学习分享/AI学习分享-2026-05-21.html">打开 AI 学习分享</a>
+        </div>
       </section>
     </main>
-
-    <template id="languageChoiceTemplate">
-      <label class="language-card">
-        <input type="checkbox" />
-        <span class="badge"></span>
-        <strong></strong>
-        <small></small>
-      </label>
-    </template>
-
-    <template id="testCardTemplate">
-      <article class="test-card">
-        <div class="card-head">
-          <div>
-            <p class="locale"></p>
-            <h3></h3>
-          </div>
-          <span class="status-pill"></span>
-        </div>
-        <div class="prompt-box">
-          <p class="scene"></p>
-          <p class="prompt"></p>
-        </div>
-        <video class="live" playsinline muted></video>
-        <video class="playback" controls></video>
-        <div class="attempt-line"></div>
-        <div class="score-panel"></div>
-        <div class="card-actions">
-          <button class="record primary" type="button">开始录制</button>
-          <button class="stop danger" type="button" disabled>停止录制</button>
-          <button class="submit" type="button" disabled>提交本次</button>
-          <button class="retake ghost" type="button" disabled>重新录制</button>
-        </div>
-        <details class="history">
-          <summary>查看历史录制</summary>
-          <div class="history-list"></div>
-        </details>
-      </article>
-    </template>
-
-    <script src="./app.js"></script>
   </body>
 </html>
