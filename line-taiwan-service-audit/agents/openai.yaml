@@ -1,0 +1,4 @@
+interface:
+  display_name: "LINE台湾服务质检"
+  short_description: "基于LINE聊天、师生明细和BI SOP明细生成台湾教师服务质检报告"
+  default_prompt: "请使用这个技能分析LINE服务质检数据，并生成Excel质检表和总结报告。"
