@@ -1,4 +1,4 @@
-# Secrets
+# 密钥和账号信息：绝对不要提交
 .env
 .env.*
 !.env.example
@@ -12,11 +12,11 @@
 *.secret
 secrets/
 
-# Local config
+# 本地个人配置
 config/local.*
 config/private.*
 
-# Dependencies and build outputs
+# 依赖和构建产物
 node_modules/
 __pycache__/
 .pytest_cache/
@@ -26,12 +26,16 @@ build/
 .venv/
 venv/
 
-# Generated or local reports
+# Git worktree 隔离目录：团队规则要求不能被 Git 跟踪
+.worktrees/
+worktrees/
+
+# 自动生成或本地报告
 reports/private/
 reports/tmp/
 *.log
 
-# Raw business data and exports
+# 原始业务数据和导出文件：默认不进仓库
 data/raw/
 exports/
 downloads/
@@ -44,7 +48,7 @@ private/
 *.7z
 *.rar
 
-# OS/editor
+# 系统和编辑器文件
 .DS_Store
 Thumbs.db
 .idea/
