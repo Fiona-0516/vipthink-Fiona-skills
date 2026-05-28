@@ -146,7 +146,7 @@
 
       .evidence {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
       }
 
@@ -339,42 +339,18 @@
             <img src="./share-assets-2026-05-28/crm-teacher-resource-demo.png" alt="CRM 教师资源实时读取示范" />
           </div>
           <div class="shot">
-            <strong>证据 3：团队 AI 训练方向与本周任务</strong>
+            <strong>证据 3：SmartBI 工具打开示范</strong>
+            <p>把 BI 看板入口、目录和字段范围整理给 AI，让 AI 能围绕业务问题定位可读取的数据源。</p>
+            <img src="./share-assets-2026-05-28/smartbi-tool-demo.png" alt="SmartBI 工具打开示范" />
+          </div>
+          <div class="shot">
+            <strong>证据 4：团队 AI 训练方向与本周任务</strong>
             <p>展示 AI 运营负责人、AI 数据运营、AI 教务运营、AI 薪酬运营、AI 质量运营、AI 组织建设六个方向的训练重点和本周任务。</p>
             <img src="./share-assets-2026-05-28/teaching-center.png" alt="团队 AI 训练方向与本周任务" />
           </div>
         </div>
       </section>
 
-      <section>
-        <h2>五、下周计划</h2>
-        <div class="grid three">
-          <article class="card">
-            <span class="tag red">接口需求 1</span>
-            <h3>团队教师 CRM 后台接口</h3>
-            <ul>
-              <li>需要稳定获取教师花名册、团队归属、管理归属、语种、阶段、排课资源等数据。</li>
-              <li>用途：让 AI 做团队维度统计、异常归因、资源预警和管理群通知。</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag orange">接口需求 2</span>
-            <h3>教师端接口</h3>
-            <ul>
-              <li>需要提取教师端课程回放、课堂行为、学生互动、课后服务动作等数据。</li>
-              <li>用途：支撑 AI 监课、AI 质检、AI 复盘，不再只依赖人工下载视频或表格。</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag green">动作需求</span>
-            <h3>业务动作操作能力</h3>
-            <ul>
-              <li>在明确权限和审批边界后，让 AI 能执行通知、回填、标记、生成任务等动作。</li>
-              <li>原则：先只读、再草稿、再人工确认后执行，最后再考虑部分自动化。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
     </main>
   </body>
 </html>
