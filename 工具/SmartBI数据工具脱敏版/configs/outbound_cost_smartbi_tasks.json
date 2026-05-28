@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "base_url": "https://bi.61info.cn/smartbi/vision",
+  "tasks": {
+    "outbound_cost_previous_month_source": {
+      "enabled": true,
+      "description": "外呼费用月报生产源：上一完整自然月、日期维度=月、益智外呼质量监控。",
+      "report": {
+        "id": "I2c92808701977a217a21f809019785f3deca42cb",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼质量监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "date_window": "previous_month",
+        "overrides": [
+          {
+            "key": "日期维度",
+            "value": "1",
+            "displayValue": "月"
+          },
+          {
+            "key": "区域等级",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "区域细分",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "线路供应商",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "渠道一级分类",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "渠道二级分类",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "海外大区",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "海外团队",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "海外小组",
+            "value": "",
+            "displayValue": "全部"
+          }
+        ]
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}/{run_id}"
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "default": {
+    "actions": [
+      "query"
+    ]
+  },
+  "groups": {
+    "群IDcidWAPUGNrXph85TLprbtm1rg==": {
+      "actions": [
+        "query",
+        "lock_class",
+        "unlock_class"
+      ]
+    },
+    "cidlizGnYdzREayLgC60HKtHQ==": {
+      "users": {
+        "15893791304072553": {
+          "name": "小加",
+          "actions": [
+            "lock_class",
+            "unlock_class"
+          ]
+        },
+        "21533221201226361": {
+          "name": "Jessica老师",
+          "actions": [
+            "lock_class",
+            "unlock_class"
+          ]
+        },
+        "235338615336836828": {
+          "name": "CoCo老師",
+          "actions": [
+            "lock_class",
+            "unlock_class"
+          ]
+        },
+        "282308496120163954": {
+          "name": "于晓晗--彩笔",
+          "actions": [
+            "lock_class",
+            "unlock_class"
+          ]
+        }
+      }
+    },
+    "cidWAPUGNrXph85TLprbtm1rg==": {
+      "users": {
+        "16145017447731736": {
+          "name": "宗瑞钰",
+          "actions": [
+            "lock_class",
+            "unlock_class"
+          ]
+        }
+      }
+    },
+    "cidimHUBBFAqfyWBSpl2boztg==": {
+      "actions": [
+        "lock_class",
+        "unlock_class"
+      ]
+    },
+    "cidxbsKpwTNlh8wr2ZeaYMPKA==": {
+      "users": {
+        "28564046221293685": {
+          "name": "Dainty",
+          "actions": [
+            "lock_class",
+            "unlock_class"
+          ]
+        }
+      }
+    },
+    "cidUthljqT3diFUzvmducuawA==": {
+      "users": {
+        "16157705710843289": {
+          "name": "杜力",
+          "actions": [
+            "allow_makeup",
+            "disallow_makeup"
+          ]
+        },
+        "16202669628489955": {
+          "name": "张旭东",
+          "actions": [
+            "allow_makeup",
+            "disallow_makeup",
+            "lock_class",
+            "unlock_class"
+          ]
+        },
+        "28515842451097107": {
+          "name": "薛迎—薛薛",
+          "actions": [
+            "allow_makeup",
+            "disallow_makeup",
+            "lock_class",
+            "unlock_class"
+          ]
+        },
+        "263140156921105616": {
+          "name": "刘海鹏",
+          "actions": [
+            "allow_makeup",
+            "disallow_makeup",
+            "lock_class",
+            "unlock_class"
+          ]
+        }
+      }
+    }
+  }
+}

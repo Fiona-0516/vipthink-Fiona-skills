@@ -1,0 +1,16 @@
+[Unit]
+Description=WeCom Callback Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/app/data/所有对话/主对话/dingtalk_stream_bot
+ExecStart=/usr/bin/python3 -m uvicorn wecom_callback_service:app --host 0.0.0.0 --port 8091
+Restart=always
+RestartSec=10
+StandardOutput=append:/app/data/所有对话/主对话/dingtalk_stream_bot/wecom_service.log
+StandardError=append:/app/data/所有对话/主对话/dingtalk_stream_bot/wecom_service.log
+
+[Install]
+WantedBy=multi-user.target

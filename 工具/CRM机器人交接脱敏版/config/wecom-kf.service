@@ -1,0 +1,30 @@
+[Unit]
+Description=WeCom Customer Service (KF) Service
+Documentation=https://work.weixin.qq.com/
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/app/data/所有对话/主对话/dingtalk_stream_bot
+ExecStart=/usr/bin/python3 wecom_kf_service.py
+Restart=always
+RestartSec=10
+
+# 环境变量配置
+Environment="LLM_API_URL="
+Environment="LLM_API_KEY="
+Environment="LLM_MODEL=gpt-3.5-turbo"
+
+# 日志配置
+StandardOutput=append:wecom_kf_service.log
+StandardError=append:wecom_kf_service.log
+
+# 安全配置
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/app/data/所有对话/主对话/dingtalk_stream_bot
+
+[Install]
+WantedBy=multi-user.target

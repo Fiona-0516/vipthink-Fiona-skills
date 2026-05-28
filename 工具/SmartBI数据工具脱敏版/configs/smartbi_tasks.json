@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "base_url": "https://bi.61info.cn/smartbi/vision",
+  "tasks": {
+    "outbound_quality_default": {
+      "enabled": true,
+      "description": "海外产运/外呼/益智外呼质量监控，使用报表默认筛选项。",
+      "report": {
+        "id": "I2c92808701977a217a21f809019785f3deca42cb",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼质量监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "mode": "default"
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}"
+      }
+    },
+    "outbound_quality_hk_nonbulk_previous_week": {
+      "enabled": true,
+      "description": "质量监控报表测试任务：上一自然周、中国香港、非批量外呼。",
+      "report": {
+        "id": "I2c92808701977a217a21f809019785f3deca42cb",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼质量监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "date_window": "previous_week",
+        "overrides": [
+          {
+            "key": "区域细分",
+            "value": "中国香港",
+            "displayValue": "中国香港"
+          },
+          {
+            "key": "是否批量外呼",
+            "value": "非批量外呼",
+            "displayValue": "否"
+          }
+        ]
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}"
+      }
+    },
+    "outbound_quality_daily_default": {
+      "enabled": true,
+      "description": "海外产运/外呼/益智外呼质量日监控，使用报表默认筛选项。",
+      "report": {
+        "id": "I2c92808701989a869a8616730198a691d3a0244d",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼质量日监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "date_window": "previous_week"
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}"
+      }
+    },
+    "outbound_time_segment_previous_week": {
+      "enabled": true,
+      "description": "海外产运/外呼/益智外呼分时段监控，测试上一自然周日期覆盖。",
+      "report": {
+        "id": "I2c9280870198be92be929e460198e093e4197322",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼分时段监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "date_window": "previous_week"
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}"
+      }
+    }
+  }
+}
