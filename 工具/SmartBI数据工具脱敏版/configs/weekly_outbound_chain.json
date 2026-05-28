@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "base_url": "https://bi.61info.cn/smartbi/vision",
+  "weekly_report": {
+    "tw_weekly_number_count": 28,
+    "tw_weekly_number_note": "台湾地区外呼周内号码量。已长期稳定为 28；如业务侧变更，改此配置后重跑对应周报。"
+  },
+  "tasks": {
+    "weekly_outbound_general_source": {
+      "enabled": true,
+      "description": "外呼数据周报 general source：质量监控报表，显式拉取周报所需区域、供应商和大区明细。",
+      "assertions": {
+        "dimensions": {
+          "线路供应商": {
+            "only": [
+              "CM",
+              "新Vonage",
+              "米糠云",
+              "汇总"
+            ],
+            "require": [
+              "CM",
+              "新Vonage",
+              "米糠云"
+            ]
+          },
+          "区域细分": {
+            "only": [
+              "美国",
+              "中国香港",
+              "中国澳门",
+              "新加坡",
+              "澳大利亚",
+              "英国",
+              "中国台湾",
+              "汇总"
+            ],
+            "require": [
+              "美国",
+              "中国香港",
+              "中国澳门",
+              "新加坡",
+              "澳大利亚",
+              "英国",
+              "中国台湾"
+            ]
+          }
+        }
+      },
+      "report": {
+        "id": "I2c92808701977a217a21f809019785f3deca42cb",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼质量监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "overrides": [
+          {
+            "key": "开始日期",
+            "value": "1970-01-05",
+            "displayValue": "1970-01-05"
+          },
+          {
+            "key": "结束日期",
+            "value": "1970-01-11",
+            "displayValue": "1970-01-11"
+          },
+          {
+            "key": "日期维度",
+            "value": "2",
+            "displayValue": "周"
+          },
+          {
+            "key": "区域等级",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "区域细分",
+            "value": "美国,中国香港,中国澳门,新加坡,澳大利亚,英国,中国台湾",
+            "displayValue": "美国,中国香港,中国澳门,新加坡,澳大利亚,英国,中国台湾"
+          },
+          {
+            "key": "线路供应商",
+            "value": "CM,新Vonage,米糠云",
+            "displayValue": "CM,新Vonage,米糠云"
+          },
+          {
+            "key": "渠道一级分类",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "渠道二级分类",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "海外大区",
+            "value": "海外销售部,海外教学服务部,海外TMK团队",
+            "displayValue": "海外销售部,海外教学服务部,海外TMK团队"
+          },
+          {
+            "key": "海外团队",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "海外小组",
+            "value": "",
+            "displayValue": "全部"
+          }
+        ]
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/chain_runs/runtime/{task}"
+      }
+    },
+    "weekly_outbound_hk_tmk_source": {
+      "enabled": true,
+      "description": "外呼数据周报 HK TMK source：中国香港、海外TMK团队、投放和海外港澳商务。",
+      "assertions": {
+        "dimensions": {
+          "线路供应商": {
+            "only": [
+              "CM",
+              "米糠云",
+              "汇总"
+            ],
+            "require": [
+              "CM",
+              "米糠云"
+            ]
+          },
+          "区域细分": {
+            "only": [
+              "中国香港",
+              "汇总"
+            ],
+            "require": [
+              "中国香港"
+            ]
+          }
+        }
+      },
+      "report": {
+        "id": "I2c92808701977a217a21f809019785f3deca42cb",
+        "path": "分析报表/海外直播业务线/海外产运/外呼/益智外呼质量监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "overrides": [
+          {
+            "key": "开始日期",
+            "value": "1970-01-05",
+            "displayValue": "1970-01-05"
+          },
+          {
+            "key": "结束日期",
+            "value": "1970-01-11",
+            "displayValue": "1970-01-11"
+          },
+          {
+            "key": "日期维度",
+            "value": "2",
+            "displayValue": "周"
+          },
+          {
+            "key": "区域细分",
+            "value": "中国香港",
+            "displayValue": "中国香港"
+          },
+          {
+            "key": "线路供应商",
+            "value": "CM,米糠云",
+            "displayValue": "CM,米糠云"
+          },
+          {
+            "key": "渠道一级分类",
+            "value": "投放,海外港澳商务",
+            "displayValue": "投放,海外港澳商务"
+          },
+          {
+            "key": "海外大区",
+            "value": "海外TMK团队",
+            "displayValue": "海外TMK团队"
+          },
+          {
+            "key": "海外团队",
+            "value": "",
+            "displayValue": "全部"
+          },
+          {
+            "key": "海外小组",
+            "value": "",
+            "displayValue": "全部"
+          }
+        ]
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/chain_runs/runtime/{task}"
+      }
+    }
+  }
+}

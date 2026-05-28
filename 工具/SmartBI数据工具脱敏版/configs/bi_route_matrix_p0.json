@@ -1,0 +1,29 @@
+{
+  "schema_version": "bi-route-matrix-p0",
+  "description": "Offline BI route matrix cases for validating business-question to SmartBI dry-run packet routing. This config must not trigger SmartBI export.",
+  "registry": "outputs/bi_catalog_registry/bi_report_route_index_current.json",
+  "output_root": "outputs/bi_catalog_registry/matrix_runs",
+  "cases": [
+    {
+      "id": "fb_material_roi2",
+      "query": "投放 FB 素材 ROI2 例子 约课",
+      "metrics": ["ROI2"],
+      "expected_reports": ["投放FB链路指标--素材维度"],
+      "expected_registry_type": "SPREADSHEET_REPORT"
+    },
+    {
+      "id": "taiwan_channel_cost",
+      "query": "台湾 渠道 消耗 例子成本 约课率",
+      "metrics": ["例子成本"],
+      "expected_reports": ["台湾商务-链路达成数据"],
+      "expected_registry_type": "SPREADSHEET_REPORT"
+    },
+    {
+      "id": "fb_channel_trend",
+      "query": "海外投放 FB 渠道 日监控 消耗 例子成本 趋势",
+      "metrics": ["例子成本"],
+      "expected_reports": ["海外投放FB渠道日监控"],
+      "expected_registry_type": "SPREADSHEET_REPORT"
+    }
+  ]
+}

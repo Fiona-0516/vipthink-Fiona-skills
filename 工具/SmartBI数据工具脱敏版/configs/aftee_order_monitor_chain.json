@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "business_constraints": {
+    "product": "AFTEE",
+    "launch_date": "2025-09-28",
+    "available_region": "台湾",
+    "source_window": {
+      "start_date": "2025-09-28",
+      "end_date": "latest_available"
+    },
+    "note": "Task-level constraint from operator: AFTEE launched on 2025-09-28 and is only available in Taiwan. Do not use a rolling one-week Smartbi source window; export cumulative data from launch date to latest date, then slice locally for weekly reporting."
+  },
+  "smartbi_report": {
+    "id": "I2c9280870192245924599d6c01923d85cc745081",
+    "alias": "海外益智主订单宽表",
+    "name": "海外益智主订单宽表v1",
+    "type": "SIMPLE_REPORT",
+    "path": "分析报表/海外直播业务线/海外经营/单价/海外益智主订单宽表"
+  },
+  "smartbi_filters": {
+    "start_date": "2025-09-28",
+    "end_date": "latest_available",
+    "thinking_region": "海外",
+    "order_type": "新签,续费",
+    "region_level": "台湾",
+    "region_level_display": "台湾",
+    "region_filter_alias": "区域细分",
+    "region_value": "中国台湾",
+    "region_display": "中国台湾",
+    "hard_require_region_filter": true,
+    "notes": [
+      "Do not filter 支付方式; the AFTEE订单监控 skill needs both AFTEE and non-AFTEE Taiwan orders to classify 分期 vs 一次性.",
+      "Smartbi SIMPLE_REPORT parameter value and display value for 区域细分 must both be 中国台湾; using 台湾 can return an empty or invalid export."
+    ]
+  },
+  "quality_gates": {
+    "required_source_columns": [
+      "支付时间",
+      "支付方式",
+      "第一业绩四级部门",
+      "合同金额",
+      "区域细分"
+    ],
+    "allowed_region_values": [
+      "中国台湾",
+      "台湾",
+      "台灣"
+    ],
+    "fail_if_export_has_header_only": true,
+    "template_required_sheets": [
+      "订单数维度",
+      "GMV维度"
+    ]
+  },
+  "workflow": {
+    "source_export": "Smartbi SIMPLE_REPORT export from 2025-09-28 to latest available date",
+    "local_processing": "skills/AFTEE订单监控/scripts/generate_report.py",
+    "output": "订单数维度 + GMV维度 weekly workbook",
+    "automation": {
+      "id": "aftee-order-monitor-weekly",
+      "status": "ACTIVE",
+      "schedule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=14;BYMINUTE=30;BYSECOND=0",
+      "maturity": "Production Candidate",
+      "gate_status": "accepted risk",
+      "notes": [
+        "SIMPLE_REPORT browser export support has been implemented and validated for the local automation path.",
+        "Real exports still depend on SMARTBI_USERNAME, SMARTBI_PASSWORD, Playwright/Chrome browser state, and the Taiwan region guards in this config."
+      ]
+    }
+  }
+}

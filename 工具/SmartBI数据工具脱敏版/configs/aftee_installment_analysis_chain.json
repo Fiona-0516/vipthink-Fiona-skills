@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "business_constraints": {
+    "product": "AFTEE",
+    "launch_date": "2025-09-28",
+    "available_region": "台湾",
+    "source_window": {
+      "start_date": "2025-09-28",
+      "end_date": "latest_available"
+    },
+    "note": "This is the AFTEE repayment/installment detail workflow, not the main-order payment-method order-count/GMV monitor."
+  },
+  "smartbi_report": {
+    "id": "I2c928087019bd7a5d7a5f36d019bdfb3c8141151",
+    "alias": "海外益智AFTEE订单明细",
+    "name": "海外益智AFTEE订单明细",
+    "type": "SIMPLE_REPORT",
+    "path": "分析报表/海外直播业务线/海外产运/支付/海外益智AFTEE订单明细"
+  },
+  "smartbi_filters": {
+    "start_date": "2025-09-28",
+    "end_date": "latest_available",
+    "order_type": "新签,续费",
+    "notes": [
+      "Do not confuse this source with 海外益智主订单宽表.",
+      "Leave 最新还款开始时间/最新还款结束时间 blank for full repayment lifecycle coverage unless a specific repayment-window analysis is requested."
+    ]
+  },
+  "quality_gates": {
+    "required_source_columns": [
+      "订单号",
+      "用户ID",
+      "订单支付时间",
+      "首期还款日",
+      "退费审批状态",
+      "当前CC小组"
+    ],
+    "fail_if_export_has_header_only": true,
+    "expected_cleaned_sheets": [
+      "清洗后明细",
+      "清洗排除明细",
+      "清洗汇总"
+    ]
+  },
+  "report_pack": {
+    "current_cc_group": "台湾CC02组",
+    "baseline_cleaned_workbook": "outputs/aftee_cleaned/台湾AFTEE订单清洗后数据_20260507.xlsx",
+    "sheets": [
+      "CC02分期自有转移",
+      "较基准变化",
+      "3期CC02自有_生命周期CC",
+      "3期CC02自有_退费发生窗口",
+      "口径说明"
+    ]
+  }
+}

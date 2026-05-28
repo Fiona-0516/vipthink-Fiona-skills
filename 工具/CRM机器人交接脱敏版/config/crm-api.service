@@ -1,0 +1,16 @@
+[Unit]
+Description=CRM API Service for WeChat Work Bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/app/data/所有对话/主对话/dingtalk_stream_bot
+ExecStart=/usr/bin/python3 -m uvicorn crm_api_service:app --host 0.0.0.0 --port 8090
+Restart=always
+RestartSec=5
+StandardOutput=append:/app/data/所有对话/主对话/dingtalk_stream_bot/crm_api_service.log
+StandardError=append:/app/data/所有对话/主对话/dingtalk_stream_bot/crm_api_service.log
+
+[Install]
+WantedBy=multi-user.target
