@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 工具应用实践分享 - 2026-05-28</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --ink: #18212f;
+        --muted: #667085;
+        --line: #d8dee8;
+        --panel: #ffffff;
+        --blue: #1d4ed8;
+        --green: #0f766e;
+        --orange: #b45309;
+        --red: #b42318;
+        --purple: #7c3aed;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.65;
+      }
+
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 38px 24px 64px;
+      }
+
+      .hero,
+      section,
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .hero,
+      section {
+        padding: 30px;
+      }
+
+      section {
+        margin-top: 22px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 40px;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 28px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      .summary {
+        font-size: 20px;
+      }
+
+      .meta,
+      .note {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        margin-bottom: 12px;
+        border-radius: 999px;
+        color: var(--blue);
+        background: #e8f0ff;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .tag.green {
+        color: var(--green);
+        background: #dff5f0;
+      }
+
+      .tag.orange {
+        color: var(--orange);
+        background: #fff4df;
+      }
+
+      .tag.red {
+        color: var(--red);
+        background: #fee2e2;
+      }
+
+      .tag.purple {
+        color: var(--purple);
+        background: #ede9fe;
+      }
+
+      ul {
+        margin: 8px 0 0;
+        padding-left: 22px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .evidence {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .shot {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fafcff;
+      }
+
+      .shot strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        max-height: 520px;
+        object-fit: contain;
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .link-box {
+        padding: 16px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        word-break: break-all;
+      }
+
+      a {
+        color: var(--blue);
+      }
+
+      @media (max-width: 860px) {
+        main {
+          padding: 24px 14px 44px;
+        }
+
+        .hero,
+        section {
+          padding: 22px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .grid,
+        .grid.three,
+        .evidence {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">AI 周会分享 · 2026-05-28 16:30</p>
+        <h1>AI 从“个人探索”走向“团队可复用”</h1>
+        <p class="summary">本周分享重点放在两个层面：一是内部分享会里大家已经做出的可展示产出；二是我这周继续用 Codex 把想法沉淀成文档、工具、规范和可复用流程。核心变化是：AI 不再只是临时帮忙，而是在变成团队资产。</p>
+        <p class="meta">材料来源：钉钉听记《AI分享会-2》链接、本地内部分享会产出、Codex 本周项目文件与 GitHub 发布流程</p>
+      </header>
+
+      <section>
+        <h2>一、本周我看到的三个变化</h2>
+        <div class="grid three">
+          <article class="card">
+            <span class="tag purple">产出形态变化</span>
+            <h3>从“想法”到“可展示文件”</h3>
+            <ul>
+              <li>内部分享不再只停留在口头汇报，已经出现视频、截图、网页、报告、标准文档等可被复用的成果。</li>
+              <li>可视化证据让分享更有说服力，也让团队更容易判断哪些方向值得继续投入。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">流程形态变化</span>
+            <h3>从“单次尝试”到“固定流程”</h3>
+            <ul>
+              <li>上周我们解决了 GitHub Pages 发布链路，本周可以继续把新页面、新材料归类上传。</li>
+              <li>这意味着 AI 产出开始有沉淀位置，而不是散落在桌面和聊天记录里。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">能力形态变化</span>
+            <h3>从“会用工具”到“做出工具”</h3>
+            <ul>
+              <li>团队伙伴在做 AI 对练、排课助手、数据海报、质检标准。</li>
+              <li>我这周继续用 Codex 做规范、报告、API 梳理和技能沉淀，逐步把个人经验变成可复制方法。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>二、内部分享会的实际产出</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">yoyo</span>
+            <h3>AI 对练系统</h3>
+            <ul>
+              <li>从“想做一个练习系统”推进到可录屏、可演示的产品形态。</li>
+              <li>价值不只在系统本身，也在于证明 AI 可以辅助搭建可交互练习场景。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">彩笔</span>
+            <h3>BI 数据分析与文化海报</h3>
+            <ul>
+              <li>用 AI 辅助处理数据分析和排名展示，把数据结果转成更适合团队传播的视觉材料。</li>
+              <li>当前适合先作为半自动流程，逐步补齐数据权限和自动推送。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">陈健</span>
+            <h3>企微排课 AI 助手</h3>
+            <ul>
+              <li>围绕学员 ID、班级、老师、上课时间等真实排课信息生成操作反馈。</li>
+              <li>这个方向最接近“AI 进入一线工作流”，下一步重点是权限和稳定性。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag purple">Fiona</span>
+            <h3>视频发音评估工具</h3>
+            <ul>
+              <li>上周已完成候选人多语种录制、随机题库、三次机会、后台报告和 GitHub Pages 发布。</li>
+              <li>本周继续沉淀发布流程，让网页、分享页、素材都能归类到 GitHub，方便发给别人测试。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>三、我这周在 Codex 上的产出</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag green">规范沉淀</span>
+            <h3>团队 Git/GitHub 规范与快速上手手册</h3>
+            <ul>
+              <li>把“怎么上传、怎么归类、怎么协作、什么不能上传”整理成团队可读手册。</li>
+              <li>重点不是让每个人变成工程师，而是让 AI 产出有版本、有归档、有安全边界。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag">技能沉淀</span>
+            <h3>CRM 教师资源查询 Skill</h3>
+            <ul>
+              <li>梳理 CRM 教师资源只读接口、参数、年级 ID、返回字段和安全边界。</li>
+              <li>形成可复用技能：以后遇到查老师资源、匹配空班时，可以按固定流程让 AI 辅助。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">报告产出</span>
+            <h3>教学组织升级与岗位人员盘点报告</h3>
+            <ul>
+              <li>用 Codex 辅助生成结构化报告，聚焦岗位、人员、组织升级和后续行动。</li>
+              <li>这种产出适合管理场景：先把零散信息压缩成结构，再用于讨论和决策。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag purple">标准建设</span>
+            <h3>海外 AI 质检标准与 SOP 质检数据</h3>
+            <ul>
+              <li>开始把质检标准、质检明细、结果表放进可被 AI 读取和分析的资料池。</li>
+              <li>下一步可以探索：从人工看表，升级为 AI 先筛异常、提炼问题、生成复盘建议。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>四、有图有真相：本周证据</h2>
+        <div class="evidence">
+          <div class="shot">
+            <strong>内部分享产出：教学中心 / 工具展示</strong>
+            <p>展示团队在 AI 工具和教学业务结合上的实际材料。</p>
+            <img src="./share-assets-2026-05-28/teaching-center.png" alt="教学中心分享截图" />
+          </div>
+          <div class="shot">
+            <strong>Codex 产出：本周工具与资料沉淀</strong>
+            <p>展示这周在 Codex 上形成的文件、报告、规范和可复用材料。</p>
+            <img src="./share-assets-2026-05-28/codex-output.png" alt="Codex 本周产出截图" />
+          </div>
+          <div class="shot">
+            <strong>报告证据：教学组织升级报告</strong>
+            <p>已生成 PDF，可作为管理讨论材料。</p>
+            <div class="link-box"><a href="./share-assets-2026-05-28/org-upgrade-report.pdf">打开教学组织升级-岗位人员盘点报告.pdf</a></div>
+          </div>
+          <div class="shot">
+            <strong>标准证据：海外 AI 质检标准</strong>
+            <p>已沉淀为 PDF，可继续扩展为 AI 质检知识库。</p>
+            <div class="link-box"><a href="./share-assets-2026-05-28/ai-qc-standard.pdf">打开海外AI质检标准.pdf</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>五、下一步建议</h2>
+        <div class="grid three">
+          <article class="card">
+            <span class="tag red">先跑小闭环</span>
+            <h3>不要一上来追求全自动</h3>
+            <ul>
+              <li>先做 AI 生成草稿、AI 初筛、AI 汇总，再保留人工确认。</li>
+              <li>降低误判风险，也降低大家对 AI 的心理门槛。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">保留证据</span>
+            <h3>每个 AI 项目都要有截图、链接或文件</h3>
+            <ul>
+              <li>没有证据的分享容易变成口头描述。</li>
+              <li>有图、有链接、有文件，才方便团队复盘和复用。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">沉淀方法</span>
+            <h3>把成功路径写成模板或 Skill</h3>
+            <ul>
+              <li>一个人跑通后，要让后面的人少走弯路。</li>
+              <li>能复用的流程，就沉淀成文档、脚本、模板或技能。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>六、我的总结</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag red">关键卡点</span>
+            <h3>AI 使用的第一关，往往不是能力，而是开始</h3>
+            <ul>
+              <li>工具安装、账号注册、权限配置，会先筛掉一批人。</li>
+              <li>结果不准确、需要反复调优，又会筛掉一批人。</li>
+              <li>这很像管理者从自己拿结果，转向带团队拿结果：短期看慢，长期才形成杠杆。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">哇哦时刻</span>
+            <h3>要刻意给自己设置阶段性成就感</h3>
+            <ul>
+              <li>一个网页打开、一个脚本跑通、一个报告生成，都是继续研究的燃料。</li>
+              <li>走在前面的人值得尊敬，因为他们让后面的伙伴少走很多弯路。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag purple">认知转变</span>
+            <h3>从“AI 能帮我做什么”到“这件事怎么用 AI 做”</h3>
+            <ul>
+              <li>以前是绞尽脑汁想 AI 能做什么，现在是拿到具体任务就反问：这件事如何用 AI 做？</li>
+              <li>当你发现自己不知道的时候，恰恰是知道的开始。真正难的是：你不知道自己不知道。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
