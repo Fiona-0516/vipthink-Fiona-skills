@@ -1,0 +1,11 @@
+.env
+out/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.jsonl
+*.log
+crm_frontend_js/
+__pycache__/
+.DS_Store

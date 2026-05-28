@@ -1,0 +1,4 @@
+interface:
+  display_name: "CRM 红线钉钉推送"
+  short_description: "自动读取 CRM 考勤红线、匹配团队并生成钉钉推送。"
+  default_prompt: "读取 CRM 迟到早退红线数据，按指定团队范围筛选，生成登记表数据并推送到钉钉群。"
