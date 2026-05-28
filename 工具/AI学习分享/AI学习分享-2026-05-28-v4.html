@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 工具应用实践分享 - 2026-05-28</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --ink: #18212f;
+        --muted: #667085;
+        --line: #d8dee8;
+        --panel: #ffffff;
+        --blue: #1d4ed8;
+        --green: #0f766e;
+        --orange: #b45309;
+        --red: #b42318;
+        --purple: #7c3aed;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.65;
+      }
+
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 38px 24px 64px;
+      }
+
+      .hero,
+      section,
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .hero,
+      section {
+        padding: 30px;
+      }
+
+      section {
+        margin-top: 22px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 40px;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 28px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      .summary {
+        font-size: 20px;
+      }
+
+      .meta,
+      .note {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        margin-bottom: 12px;
+        border-radius: 999px;
+        color: var(--blue);
+        background: #e8f0ff;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .tag.green {
+        color: var(--green);
+        background: #dff5f0;
+      }
+
+      .tag.orange {
+        color: var(--orange);
+        background: #fff4df;
+      }
+
+      .tag.red {
+        color: var(--red);
+        background: #fee2e2;
+      }
+
+      .tag.purple {
+        color: var(--purple);
+        background: #ede9fe;
+      }
+
+      ul {
+        margin: 8px 0 0;
+        padding-left: 22px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .evidence {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .shot {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fafcff;
+      }
+
+      .shot strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        max-height: 720px;
+        object-fit: contain;
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .link-box {
+        padding: 16px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        word-break: break-all;
+      }
+
+      a {
+        color: var(--blue);
+      }
+
+      @media (max-width: 860px) {
+        main {
+          padding: 24px 14px 44px;
+        }
+
+        .hero,
+        section {
+          padding: 22px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .grid,
+        .grid.three,
+        .evidence {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">AI 周会分享 · 2026-05-28 16:30</p>
+        <h1>AI 从“个人探索”走向“团队可复用”</h1>
+        <p class="summary">本周分享重点放在两个层面：一是内部分享会里大家已经做出的可展示产出；二是我这周继续用 Codex 把想法沉淀成文档、工具、规范和可复用流程。核心变化是：AI 不再只是临时帮忙，而是在变成团队资产。</p>
+        <p class="meta">材料来源：钉钉听记《AI分享会-2》链接、本地内部分享会产出、Codex 本周项目文件与 GitHub 发布流程</p>
+      </header>
+
+      <section>
+        <h2>一、本周我看到的三个变化</h2>
+        <div class="grid three">
+          <article class="card">
+            <span class="tag purple">产出形态变化</span>
+            <h3>从“想法”到“可展示文件”</h3>
+            <ul>
+              <li>内部分享不再只停留在口头汇报，已经出现视频、截图、网页、报告、标准文档等可被复用的成果。</li>
+              <li>可视化证据让分享更有说服力，也让团队更容易判断哪些方向值得继续投入。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">流程形态变化</span>
+            <h3>从“单次尝试”到“固定流程”</h3>
+            <ul>
+              <li>上周我们解决了 GitHub Pages 发布链路，本周可以继续把新页面、新材料归类上传。</li>
+              <li>这意味着 AI 产出开始有沉淀位置，而不是散落在桌面和聊天记录里。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">能力形态变化</span>
+            <h3>从“会用工具”到“做出工具”</h3>
+            <ul>
+              <li>团队伙伴在做 AI 对练、排课助手、数据海报、质检标准。</li>
+              <li>我这周的重点是把 AI 接进真实业务数据：LINE 质检、红线通知、BI/CRM 实时查询。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>二、内部分享会与本周实际产出重点</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">台湾 LINE</span>
+            <h3>台湾 LINE 教学服务质检</h3>
+            <ul>
+              <li>完成台湾教师团队 LINE 服务质检，并整合 BI 课次明细修正判断口径。</li>
+              <li>待复核从 5848 条降到 3105 条，减少 2743 条；BI 明细覆盖 29537 条课次、1278 个用户。</li>
+              <li>核心价值：AI 不再只读聊天记录，而是结合业务数据判断“该不该质检、怎么质检”。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag red">红线管理</span>
+            <h3>团队红线数据打通钉钉管理群</h3>
+            <ul>
+              <li>打通 CRM 迟到、早退、严重早退等红线异常数据，按海外直播业务线和团队归属做聚合。</li>
+              <li>将异常明细推送到钉钉管理群，形成提醒、核实、原因回填的管理闭环。</li>
+              <li>截图示范：机器人自动发送 5 月 27 日红线异常提醒，按语种组列出老师、时间和房间号。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">BI / CRM</span>
+            <h3>给 AI 安装可读取 BI 和 CRM 的工具</h3>
+            <ul>
+              <li>整理 SmartBI 工具包用途和 CRM 教师资源只读接口，让 AI 可以按规则读取业务数据。</li>
+              <li>示例：按 CRM 教师资源接口查询英语 S1-S7、每天早上 7:00 的剩余可排老师数量。</li>
+              <li>本周示范结果：周一 22、周二 14、周三 19、周四 12、周五 13、周六 8、周日 20。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag purple">Fiona</span>
+            <h3>从工具使用到业务自动化底座</h3>
+            <ul>
+              <li>延续上周发音评估工具、分享页发布链路，本周把重点转向内部业务数据读取和动作闭环。</li>
+              <li>下一阶段不是“AI 生成一个页面”，而是“AI 能稳定读取系统数据、输出判断、触发管理动作”。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>三、我这周在 Codex 上的产出</h2>
+        <div class="grid">
+          <article class="card">
+            <span class="tag green">LINE 质检</span>
+            <h3>台湾 LINE 质检 + BI 数据整合</h3>
+            <ul>
+              <li>产出 LINE 服务质检上传包、结果表、总结文档和 BI 整合版结果。</li>
+              <li>把“聊天证据”和“BI 课次事实”结合，减少大量不必要的待复核。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag red">红线闭环</span>
+            <h3>CRM 红线异常 → 钉钉提醒 → 原因回填</h3>
+            <ul>
+              <li>产出 `crm_redline.py`，支持读取迟到、早退、严重早退异常并生成管理维度明细。</li>
+              <li>把红线数据推到钉钉管理群，推动从“看报表”变成“群内提醒和回填”。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">CRM 查询</span>
+            <h3>实时读取剩余可排教师人数</h3>
+            <ul>
+              <li>梳理 CRM 老师资源查询、英语 S1-S7 阶段 ID、只读接口路径和字段说明。</li>
+              <li>示范查询：英语语种早 7 点，每天跨阶段去重后剩余可排老师人数。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag purple">BI 工具</span>
+            <h3>给 AI 安装 SmartBI 读取工具</h3>
+            <ul>
+              <li>整理 SmartBI 工具包和业务数据地图，让 AI 知道哪些看板、字段、导出文件能服务哪些管理问题。</li>
+              <li>这一步的意义是把 AI 从“只能读我给它的文件”，推进到“能按规则读取业务系统”。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>四、有图有真相：本周证据</h2>
+        <div class="evidence">
+          <div class="shot">
+            <strong>证据 1：红线异常钉钉通知示范</strong>
+            <p>CodexTeddy 机器人将 CRM 红线异常按业务线、语种组、老师、时间和房间号推送到管理群。</p>
+            <img src="./share-assets-2026-05-28/redline-dingtalk-demo.png" alt="红线异常钉钉通知示范" />
+          </div>
+          <div class="shot">
+            <strong>证据 2：CRM 教师资源实时读取示范</strong>
+            <p>AI 通过 CRM 只读老师资源接口，查询英语 S1-S7 每天早 7 点剩余可排教师人数。</p>
+            <img src="./share-assets-2026-05-28/crm-teacher-resource-demo.png" alt="CRM 教师资源实时读取示范" />
+          </div>
+          <div class="shot">
+            <strong>证据 3：团队 AI 训练方向与本周任务</strong>
+            <p>展示 AI 运营负责人、AI 数据运营、AI 教务运营、AI 薪酬运营、AI 质量运营、AI 组织建设六个方向的训练重点和本周任务。</p>
+            <img src="./share-assets-2026-05-28/teaching-center.png" alt="团队 AI 训练方向与本周任务" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>五、下周计划</h2>
+        <div class="grid three">
+          <article class="card">
+            <span class="tag red">接口需求 1</span>
+            <h3>团队教师 CRM 后台接口</h3>
+            <ul>
+              <li>需要稳定获取教师花名册、团队归属、管理归属、语种、阶段、排课资源等数据。</li>
+              <li>用途：让 AI 做团队维度统计、异常归因、资源预警和管理群通知。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag orange">接口需求 2</span>
+            <h3>教师端接口</h3>
+            <ul>
+              <li>需要提取教师端课程回放、课堂行为、学生互动、课后服务动作等数据。</li>
+              <li>用途：支撑 AI 监课、AI 质检、AI 复盘，不再只依赖人工下载视频或表格。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag green">动作需求</span>
+            <h3>业务动作操作能力</h3>
+            <ul>
+              <li>在明确权限和审批边界后，让 AI 能执行通知、回填、标记、生成任务等动作。</li>
+              <li>原则：先只读、再草稿、再人工确认后执行，最后再考虑部分自动化。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
